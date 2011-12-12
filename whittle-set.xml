@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- <PropertyList include="whittle-jsbsim-cnf.xml"> -->
+<PropertyList include="whittle-yasim-cnf.xml">
+
+  <sim>
+    <description>Gloster E28/39 (YASim)</description>
+    <author>Emmanuel BARANGER (3D/FDM)</author>
+
+    <rating>
+      <FDM type="int">     0 </FDM>
+      <systems type="int"> 0 </systems>
+      <cockpit type="int"> 0 </cockpit>
+      <model type="int">   3 </model>
+    </rating>
+
+  </sim>
+
+</PropertyList>
+
