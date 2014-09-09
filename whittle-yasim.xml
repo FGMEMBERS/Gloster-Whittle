@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!-- Gloster E28/39 "Whittle" : November 2011 BARANGER Emmanuel
+
+     sources      : http://en.wikipedia.org/wiki/Gloster_E.28/39
+
+     Wingspan     : 29 ft  0 in ( 8.84 m   )
+     Lenght       : 25 ft  4 in ( 7.74 m   )
+     Height       :  8 ft 10 in ( 2.70 m   )
+     Weight       :     2886 lb ( 1309 kg  )
+     Engines      : Power Jets W.1 turbojet ( 860 lb )
+     Max speed    :    296.5 kt ( 544 km/h ) at 10000 ft ( 3050 m )
+-->
+
+<airplane mass="2886">
+
+  <approach speed="80" aoa="6" fuel="0.3">
+    <control-setting axis="/controls/engines/engine[0]/throttle" value="0.3"/>
+    <control-setting axis="/controls/flight/flaps" value="1"/>
+    <control-setting axis="/controls/gear/gear-down" value="1"/>
+  </approach>
+
+  <cruise speed="250" alt="10000" fuel="0.7">
+    <control-setting axis="/controls/engines/engine[0]/throttle" value="0.7"/>
+    <control-setting axis="/controls/flight/flaps" value="0"/>
+    <control-setting axis="/controls/gear/gear-down" value="0"/>
+  </cruise>
+
+  <cockpit x="1.888" y="0.0" z="0.629"/>
+
+  <!-- Cockpit -->
+  <fuselage ax="2.658" ay="0" az=" 0.421" bx=" 0.134" by="0" bz=" 0.421" width="0.686" taper="0.5" midpoint="0.2"/>
+  <!-- Fuselage -->
+  <fuselage ax="3.862" ay="0" az="-0.232" bx="-3.814" by="0" bz="-0.215" width="1.235" taper="0.5" midpoint="0.2"/>
+
+
+  <wing x="0.536" y="0.499" z="-0.681"
+        chord="2.086" 
+        length="3.872" 
+        taper="0.40"
+        sweep="-4"
+        camber="0.01"
+        dihedral="4">
+        <stall aoa="16" width="1" peak="1.3"/>
+        <flap0 start="0.017" end="0.573" lift="1.3" drag="1.5"/>
+        <flap1 start="0.573" end="0.945" lift="1.1" drag="1.0"/>
+
+        <control-input axis="/controls/flight/flaps" control="FLAP0"/> 
+        <control-input axis="/controls/flight/aileron" control="FLAP1" square="true" split="true"/> 
+        <control-input axis="/controls/flight/aileron-trim" control="FLAP1" split="true"/>
+
+        <control-output control="FLAP0" prop="/surface-positions/flaps-pos-norm"/>
+
+        <control-output control="FLAP1" side="left" prop="/surface-positions/left-aileron-pos-norm"/>
+        <control-output control="FLAP1" side="right" prop="/surface-positions/right-aileron-pos-norm"/>
+        <control-output control="FLAP1" prop="/surface-positions/aileron-pos-norm"/>
+
+        <control-speed control="FLAP0" transition-time="3"/>
+   </wing>
+
+   <hstab x="-3.048" y="0.155" z="0.179"
+         chord="1.003" 
+         length="1.650" 
+         taper="0.8"
+         sweep="4">
+         <stall aoa="14" width="1" peak="1.3"/>
+         <flap0 start="0.1" end="0.94" lift="1.5" drag="1.5"/>
+
+         <control-input axis="/controls/flight/elevator" square="false" control="FLAP0" />
+         <control-input axis="/controls/flight/elevator-trim" control="FLAP0"/>
+
+         <control-output control="FLAP0" prop="/surface-positions/elevator-pos-norm"/>
+  </hstab>
+
+  <vstab x="-2.477" y="0.00" z="0.138"
+         chord="1.302" 
+         length="1.333" 
+         taper="0.5"
+         sweep="5">
+         <stall aoa="12" width="1" peak="1.5"/>
+         <flap0 start="0.05" end="1" lift="1.5" drag="1.3"/>
+
+         <control-input axis="/controls/flight/rudder" control="FLAP0" invert="true"/>
+         <control-input axis="/controls/flight/rudder-trim" control="FLAP0" invert="true"/>
+
+         <control-output control="FLAP0" prop="/surface-positions/rudder-pos-norm"/>
+  </vstab>
+
+  <!--  Power Jets W.1
+
+                 source       : http://en.wikipedia.org/wiki/Power_Jets_W.1
+
+                 type         : Centrifugal flow turbojet
+                 weight       : 700 lb ( 318 kg )
+                 power        : 850 lb ( 386 kg ) at 16500 rpm
+  -->
+  <jet x="-0.333" y="0" z="-0.190"
+       n1-idle="30" 
+       n1-max="90" 
+       n2-idle="35" 
+       n2-max="95"
+       egt="850" 
+       tsfc="1.39"
+       mass="700" 
+       thrust="850">
+       <actionpt x="-3.808" y="0" z="-0.190"/>
+       <control-input axis="/controls/engines/engine[0]/throttle" control="THROTTLE"/>
+  </jet>
+  
+  <!-- Undercarriage -->
+  <!-- nose -->
+  <gear x="3.434" y="0" z="-1.450"
+        retract-time="3"
+        compression="0.30"
+        spring="1"
+        damp="2">
+        <control-input axis="/controls/flight/rudder" control="STEER" src0="-1.0" src1="1.0" dst0="-0.1" dst1="0.1"/>
+        <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+
+        <control-output control="EXTEND" prop="/gear/gear[0]/position-norm"/>
+
+        <control-speed control="EXTEND" transition-time="7"/>
+  </gear>
+
+  <!-- left main -->
+  <gear x="0.640" y=" 1.252" z="-1.440"
+        retract-time="3"
+        compression="0.30"
+        spring="1"
+        damp="2">
+        <control-input axis="/controls/gear/brake-left" control="BRAKE"/>
+        <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
+        <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+
+        <control-output control="EXTEND" prop="/gear/gear[1]/position-norm"/>
+
+        <control-speed control="EXTEND" transition-time="7"/>
+  </gear>
+
+  <!-- right main -->
+  <gear x="0.640" y="-1.252" z="-1.440"
+        retract-time="3"
+        compression="0.30"
+        spring="1"
+        damp="2">
+        <control-input axis="/controls/gear/brake-right" control="BRAKE"/>
+        <control-input axis="/controls/gear/brake-parking" control="BRAKE"/>
+        <control-input axis="/controls/gear/gear-down" control="EXTEND"/>
+
+        <control-output control="EXTEND" prop="/gear/gear[2]/position-norm"/>
+
+        <control-speed control="EXTEND" transition-time="7"/>
+  </gear>
+
+  <!-- Internal tanks  -->
+  <tank x="1.065" y="0" z="-0.494" jet="true" capacity="1250"/>
+
+  <!-- CG Theorique -->
+  <ballast x="2.9" y="0.0" z="-0.3" mass="650"/>
+
+</airplane>
+
